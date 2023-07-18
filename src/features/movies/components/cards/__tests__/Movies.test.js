@@ -5,7 +5,6 @@ import movieReducer, { fetchMovies, removeMovie, likeMovie, unlickedMovie, getCa
 import { Movies } from '../../../Movies';
 import { configureStore } from '@reduxjs/toolkit';
 
-// Mock des actions
 jest.mock('../../../moviesSlice', () => ({
     fetchMovies: jest.fn(),
     removeMovie: jest.fn(),
@@ -14,13 +13,12 @@ jest.mock('../../../moviesSlice', () => ({
     getCategories: jest.fn(),
 }));
 
-// Configuration du store mocké
 const mockStore = configureStore({
     reducer: {
         movies: movieReducer,
     },
 });
-const initialState = {}; // Éventuellement, vous pouvez spécifier un état initial pour vos tests
+const initialState = {};
 const store = mockStore(initialState);
 
 describe('Movies', () => {
@@ -48,10 +46,8 @@ describe('Movies', () => {
             { id: 2, title: 'Movie 2', genre: 'Comedy' },
         ];
 
-        // Mock des données retournées par useSelector
         jest.spyOn(React, 'useSelector').mockReturnValueOnce(mockMovies).mockReturnValueOnce([]);
 
-        // Vérification de l'affichage des cartes de films
         const movieCards = screen.getAllByTestId('movie-card');
         expect(movieCards).toHaveLength(mockMovies.length);
     });
@@ -60,10 +56,8 @@ describe('Movies', () => {
         const mockMovie = { id: 1, title: 'Movie 1', genre: 'Action' };
         jest.spyOn(React, 'useSelector').mockReturnValueOnce([mockMovie]).mockReturnValueOnce([]);
 
-        // Clique sur le bouton de suppression du film
         fireEvent.click(screen.getByTestId('remove-movie-button'));
 
-        // Vérification que removeMovie a été appelé avec le bon film
         expect(removeMovie).toHaveBeenCalledWith(mockMovie);
         expect(store.getActions()).toContainEqual(removeMovie(mockMovie));
     });
@@ -72,10 +66,8 @@ describe('Movies', () => {
         const mockMovie = { id: 1, title: 'Movie 1', genre: 'Action' };
         jest.spyOn(React, 'useSelector').mockReturnValueOnce([mockMovie]).mockReturnValueOnce([]);
 
-        // Clique sur le bouton de like du film
         fireEvent.click(screen.getByTestId('like-movie-button'));
 
-        // Vérification que likeMovie a été appelé avec le bon film
         expect(likeMovie).toHaveBeenCalledWith(mockMovie);
         expect(store.getActions()).toContainEqual(likeMovie(mockMovie));
     });
@@ -84,10 +76,8 @@ describe('Movies', () => {
         const mockMovie = { id: 1, title: 'Movie 1', genre: 'Action' };
         jest.spyOn(React, 'useSelector').mockReturnValueOnce([mockMovie]).mockReturnValueOnce([]);
 
-        // Clique sur le bouton de dislike du film
         fireEvent.click(screen.getByTestId('unlike-movie-button'));
 
-        // Vérification que unlickedMovie a été appelé avec le bon film
         expect(unlickedMovie).toHaveBeenCalledWith(mockMovie);
         expect(store.getActions()).toContainEqual(unlickedMovie(mockMovie));
     });

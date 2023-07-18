@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import store from '../../../../../app/store';
 import Cards, { calcProgress } from '../Card';
 
-// Mock the necessary props for the Cards component
 
 const mockMovie = {
     id: '4',
