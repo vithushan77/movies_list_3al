@@ -15,20 +15,20 @@ import Cards from './components/cards/Card';
 import Category from './components/category/Category';
 
 export function Movies() {
- const dispatch = useDispatch();
- const movieSelects = useSelector(selectMovies);
- const [movies, setMovies] = useState([]);
- const categories = useSelector(selectCategories);
+  const dispatch = useDispatch();
+  const movieSelects = useSelector(selectMovies);
+  const [movies, setMovies] = useState([]);
+  const categories = useSelector(selectCategories);
 
   useEffect(() => {
-      dispatch(fetchMovies());
+    dispatch(fetchMovies());
   }, [dispatch])
 
   useEffect(() => {
     dispatch(getCategories());
     setMovies(movieSelects);
   }, [dispatch, movieSelects])
-  // handleChange={(data) => { setMovies(data) }}
+  // handleChange={(data) => { setMovies(data) }} 
   return (
     <StyledMovies>
       {movies && categories && <Category movies={movieSelects} categories={categories} handleChange={(data) => { setMovies(data) }} />}

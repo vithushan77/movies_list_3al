@@ -6,7 +6,7 @@ import { Movies } from './features/movies/Movies';
 function App() {
   return (
     <div className="App">
-      <h2>Liste des films</h2>
+      <h2 data-testid="title">Liste des films</h2>
       <Movies />
     </div>
   );
