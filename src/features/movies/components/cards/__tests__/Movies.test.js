@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { fetchMovies, removeMovie, likeMovie, unlickedMovie, getCategories } from '../../../moviesSlice';
+import movieReducer, { fetchMovies, removeMovie, likeMovie, unlickedMovie, getCategories } from '../../../moviesSlice';
 import { Movies } from '../../../Movies';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -15,7 +15,11 @@ jest.mock('../../../moviesSlice', () => ({
 }));
 
 // Configuration du store mocké
-const mockStore = configureStore([]);
+const mockStore = configureStore({
+    reducer: {
+        movies: movieReducer,
+    },
+});
 const initialState = {}; // Éventuellement, vous pouvez spécifier un état initial pour vos tests
 const store = mockStore(initialState);
 

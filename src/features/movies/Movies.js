@@ -30,7 +30,7 @@ export function Movies() {
   }, [dispatch, movieSelects])
   // handleChange={(data) => { setMovies(data) }} 
   return (
-    <StyledMovies>
+    <StyledMovies data-testid="movies-component">
       {movies && categories && <Category movies={movieSelects} categories={categories} handleChange={(data) => { setMovies(data) }} />}
       <div className='movie-card'>
         {movies && movies.map(movie => (

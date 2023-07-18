@@ -17,11 +17,11 @@ test('renders the app with the correct title', () => {
 
 
 test('renders the title and Movies component', () => {
-  render(<Provider store={store}><App /></Provider>);
+  const { getByTestId } = render(<Provider store={store}><App /></Provider>);
 
-  const titleElement = screen.getByText('Liste des films');
+  const titleElement = getByTestId('title');
   expect(titleElement).toBeInTheDocument();
 
-  const moviesComponent = screen.getByTestId('movies-component');
+  const moviesComponent = getByTestId('movies-component');
   expect(moviesComponent).toBeInTheDocument();
 });
